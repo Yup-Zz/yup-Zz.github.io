@@ -257,22 +257,6 @@
     </span>
 
   
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2021/01/27/hello-world/#SOHUCS" itemprop="discussionUrl">
-        <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2021/01/27/hello-world/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
 </div>
 
         </div>
@@ -314,7 +298,7 @@
 
 
 
-    <div class="comments" id="SOHUCS"></div>
+    <div class="comments gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -375,17 +359,25 @@
 
 
 
-  <script>
-  NexT.utils.loadComments('#SOHUCS', () => {
-    NexT.utils.getScript('https://changyan.sohu.com/upload/changyan.js', () => {
-      window.changyan.api.config({
-        appid: 'cyvhi9Iyy',
-        conf : '4421dceffc70ed9c0e26b8b00e6ed29f'
-      });
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
+
+<script>
+NexT.utils.loadComments('.gitalk-container', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'd377b8b1ec7538067fa9',
+      clientSecret: '463c4c72c322b69b624c57aee04cbcdbfa8e18c9',
+      repo        : 'yup-Zz.github.io',
+      owner       : 'Yup-Zz',
+      admin       : [''],
+      id          : '928b548bec25c3359ecb59e290df80e9',
+        language: 'zh-CN',
+      distractionFreeMode: true
     });
-  });
-  </script>
-  <script src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+    gitalk.render(document.querySelector('.gitalk-container'));
+  }, window.Gitalk);
+});
+</script>
 
 </body>
 </html>
