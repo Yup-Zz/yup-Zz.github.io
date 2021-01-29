@@ -170,14 +170,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">3</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -223,6 +223,99 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/28/HttpClient%E6%90%BA%E5%B8%A6SSL%E8%AF%81%E4%B9%A6%E8%AE%BF%E9%97%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Yup">
+      <meta itemprop="description" content="Yup's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yup's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/01/28/HttpClient%E6%90%BA%E5%B8%A6SSL%E8%AF%81%E4%B9%A6%E8%AE%BF%E9%97%AE/" class="post-title-link" itemprop="url">HttpClient携带SSL证书访问</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-01-28 10:35:29" itemprop="dateCreated datePublished" datetime="2021-01-28T10:35:29+08:00">2021-01-28</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-01-29 15:01:22" itemprop="dateModified" datetime="2021-01-29T15:01:22+08:00">2021-01-29</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="1-JDK自带的keytool命令以及keystore相关知识"><a href="#1-JDK自带的keytool命令以及keystore相关知识" class="headerlink" title="1. JDK自带的keytool命令以及keystore相关知识"></a>1. JDK自带的keytool命令以及keystore相关知识</h3><blockquote>
+<ul>
+<li>keytool是一个Java自带的密钥管理工具，该工具可以使用相关命令，将证书导入到keysotre中。keystore指的是密钥库，所以一个keystore可以包含多个证书。keystore本质上是一个以keystore结尾的文件。</li>
+<li>keytool常用命令<ul>
+<li>keytool -import -alias 证书别名 -file 证书路径 -keystore 证书库路径  //该命令是将证书导入到指定的证书库（*.keystore）</li>
+<li>keytool -list -keystore 证书库路径   // 该命令是查看当前证书库文件中的证书列表</li>
+<li>keytool -delete -alias 证书别名 -keystore 证书库路径</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h3 id="2-Java中KeyStore类"><a href="#2-Java中KeyStore类" class="headerlink" title="2. Java中KeyStore类"></a>2. Java中KeyStore类</h3><blockquote>
+<p>KeyStore对应上述的keystore文件。也就是说KeyStore可以加载*.keyStore文件</p>
+<p>加载代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">KeyStore keystore = KeyStore.instance(KeyStore.<span class="keyword">default</span>());</span><br><span class="line">keystore.load(<span class="string">&quot;证书库文件&quot;</span>, <span class="string">&quot;证书库密码&quot;</span>.charArray());</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="3-一个HttpClientUtil"><a href="#3-一个HttpClientUtil" class="headerlink" title="3. 一个HttpClientUtil"></a>3. 一个HttpClientUtil</h3><blockquote>
+<p>在HttpClient中使用带证书的访问，主要是在构建SSLContext时，将加载完密钥库后的keysotre放入到SSLContext中。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// KeyStoreUtil方法主要逻辑和2中的代码类似，只是处理了从url获取keystore，使用inputStream来加载证书库文件</span></span><br><span class="line">KeyStore keyStore = KeyStoreUtil.loadAllCertFromConfigurationMap();</span><br><span class="line">KeyStore trustCert = KeyStoreUtil.loadAllTrustCertFromConfigurationMap();</span><br><span class="line">SSLContext ctx = SSLContexts.custom()</span><br><span class="line">  <span class="comment">// 加载对服务器证书的校验</span></span><br><span class="line">  .loadTrustMaterial(trustCert, <span class="keyword">new</span> TrustSelfSignedStrategy())</span><br><span class="line">  <span class="comment">// 加载请求时需要携带的证书</span></span><br><span class="line">  .loadKeyMaterial(keyStore, KeyStoreUtil.getPassword()).build();</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="4-SSLContext初始化完毕之后"><a href="#4-SSLContext初始化完毕之后" class="headerlink" title="4. SSLContext初始化完毕之后"></a>4. SSLContext初始化完毕之后</h3><blockquote>
+<p>SSLContext初始化完毕之后不论是使用连接池或者直接使用HttpClient都可以直接使用初始化完成后的SSLContext来创建HttpClient对象</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/28/Java%E9%9B%86%E5%90%88/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -248,7 +341,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2021-01-28 10:19:39 / 修改时间：10:21:23" itemprop="dateCreated datePublished" datetime="2021-01-28T10:19:39+08:00">2021-01-28</time>
+      <time title="创建时间：2021-01-28 10:19:39 / 修改时间：10:34:25" itemprop="dateCreated datePublished" datetime="2021-01-28T10:19:39+08:00">2021-01-28</time>
     </span>
 
   
@@ -261,24 +354,42 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="Map："><a href="#Map：" class="headerlink" title="Map："></a>Map：</h2><p>HashMap：</p>
+          <h2 id="Map："><a href="#Map：" class="headerlink" title="Map："></a>Map：</h2><p>HashMap： </p>
+<blockquote>
 <p>HashMap是最常用的Map集合，它是线程不安全的。查询速度快。HashMap的Key最多允许一条数据为null，value允许多条为null。默认大小为16，加载因子为0.75f。查询速度为O(logn)</p>
+</blockquote>
 <p>TreeMap：</p>
+<blockquote>
 <p>和HashMap类似，但是它能够根据键值进行排序，默认是按键值的升序排序（自然顺序），在创建TreeMap对象时可以指定比较器来改变排序方式，当用Iterator遍历TreeMap时，得到的记录是排过序的。不允许key值为空，它是线程不安全的。</p>
+</blockquote>
 <p>HashTable：</p>
+<blockquote>
 <p>和HashMap类似，但它底层使用了sync关键字，所以是线程安全的。另外他的键值都不允许为null。因为需要保证多线程的情况下的同步访问，所以在执行效率上没有HashMap高。</p>
+</blockquote>
 <p>ConcurrentHashMap：</p>
+<blockquote>
 <p>首先ConcurrentHashMap是线程安全的，它结合了HashMap和HashTable两者的优势，即是线程安全的，查询速度也不会因为为了保持同步状态而牺牲太大。本质上就是依靠HashTable线程安全的特性，将该集合中的部分数据使用HashTable来存储。这样当不同的线程访问到不同的分片时并不会对数据安全造成影响。同时访问到同一个分片时则后来的线程会去等待另外的一个线程去释放资源后再去操作该分片内的数据</p>
+</blockquote>
 <h2 id="Set："><a href="#Set：" class="headerlink" title="Set："></a>Set：</h2><p>HashSet：</p>
+<blockquote>
 <p>HashSet底层实现是使用HashMap的Key来实现的，所以它是线程不安全的、也是不可重复以及无序的。它的初始容量和加载因子与HashMap相同分别都是16和0.75f</p>
+</blockquote>
 <p>TreeSet：</p>
+<blockquote>
 <p>TreeSet和HashSet不同，首先它是有序的。它的底层是使用TreeMap的Key来实现的，所以他也是线程不安全以及不可重复的。</p>
+</blockquote>
 <h2 id="List："><a href="#List：" class="headerlink" title="List："></a>List：</h2><p>ArrayList：</p>
+<blockquote>
 <p>ArrayList的实现原理是可变数组。它是线程不安全的。它的初始容量为：10；每次扩充当前数组大小的一半+1。查询速度为O(n)</p>
+</blockquote>
 <p>Vector：</p>
+<blockquote>
 <p>和ArrayList的实现原理一样都是可变数组。但它底层的一些方法都使用了sync关键字。所以他是线程安全的。它的初始容量为10，每次扩充当前数组大小的一倍</p>
+</blockquote>
 <p>LinkList：</p>
+<blockquote>
 <p>他与ArrayList不同，它的底层使用的是双向链表来实现的，也是线程不安全的。在初始化时没有初始容量和加载因子的概念。因为调用Add方法时会直接在链表的最后增加一个node来关联。</p>
+</blockquote>
 <h2 id="Q：常见的集合有哪些？"><a href="#Q：常见的集合有哪些？" class="headerlink" title="Q：常见的集合有哪些？"></a>Q：常见的集合有哪些？</h2><p>回答两方面：</p>
 <ol>
 <li><p>集合的接口有两种分别是Map接口和Collection接口，Collection的子接口有Set和List两种。</p>
@@ -370,7 +481,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-01-28 10:20:22" itemprop="dateModified" datetime="2021-01-28T10:20:22+08:00">2021-01-28</time>
+        <time title="修改时间：2021-01-28 10:29:20" itemprop="dateModified" datetime="2021-01-28T10:29:20+08:00">2021-01-28</time>
       </span>
 
   
