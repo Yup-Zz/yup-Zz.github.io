@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","version":"8.2.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+<meta name="description" content="1. 提交相关1234567891011121314151617181920212223242526272829303132&#x2F;&#x2F; 添加文件至缓存区alias ga&#x3D;&amp;#x27;git add&amp;#x27; &lt;文件&#x2F;文件夹路径&gt;&#x2F;&lt;*&gt;&#x2F;&#x2F; 提交并展示缓存区文件的diffalias gc&#x3D;&amp;#x27;git commit -v&amp;#x27;&#x2F;&#x2F; 添加所有文件至缓存区并提交alia">
+<meta property="og:type" content="article">
+<meta property="og:title" content="oh-my-zsh中git命令的简写">
+<meta property="og:url" content="http://example.com/2021/02/01/oh-my-zsh%E4%B8%ADgit%E5%91%BD%E4%BB%A4%E7%9A%84%E7%AE%80%E5%86%99/index.html">
+<meta property="og:site_name" content="Yup&#39;s Blog">
+<meta property="og:description" content="1. 提交相关1234567891011121314151617181920212223242526272829303132&#x2F;&#x2F; 添加文件至缓存区alias ga&#x3D;&amp;#x27;git add&amp;#x27; &lt;文件&#x2F;文件夹路径&gt;&#x2F;&lt;*&gt;&#x2F;&#x2F; 提交并展示缓存区文件的diffalias gc&#x3D;&amp;#x27;git commit -v&amp;#x27;&#x2F;&#x2F; 添加所有文件至缓存区并提交alia">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-02-01T08:02:26.000Z">
+<meta property="article:modified_time" content="2021-02-03T02:37:12.667Z">
+<meta property="article:author" content="Yup">
+<meta property="article:tag" content="git">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2021/02/01/oh-my-zsh%E4%B8%ADgit%E5%91%BD%E4%BB%A4%E7%9A%84%E7%AE%80%E5%86%99/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<title>oh-my-zsh中git命令的简写 | Yup's Blog</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+<script src="/live2d-widget/autoload.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"/>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Yup's Blog</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%8F%90%E4%BA%A4%E7%9B%B8%E5%85%B3"><span class="nav-number">1.</span> <span class="nav-text">1. 提交相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%88%86%E6%94%AF%E7%9B%B8%E5%85%B3"><span class="nav-number">2.</span> <span class="nav-text">2. 分支相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Git%E5%88%9D%E5%A7%8B%E5%8C%96%E7%9B%B8%E5%85%B3"><span class="nav-number">3.</span> <span class="nav-text">4. Git初始化相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Git%E9%85%8D%E7%BD%AE%E7%9B%B8%E5%85%B3"><span class="nav-number">4.</span> <span class="nav-text">5. Git配置相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-Git%E5%8E%86%E5%8F%B2%E7%9B%B8%E5%85%B3"><span class="nav-number">5.</span> <span class="nav-text">6. Git历史相关</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yup"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Yup</p>
+  <div class="site-description" itemprop="description">Yup's Blog</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Yup-Zz" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Yup-Zz" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:dongzizheng@88.com" title="E-Mail → mailto:dongzizheng@88.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/01/oh-my-zsh%E4%B8%ADgit%E5%91%BD%E4%BB%A4%E7%9A%84%E7%AE%80%E5%86%99/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Yup">
+      <meta itemprop="description" content="Yup's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yup's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          oh-my-zsh中git命令的简写
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-02-01 16:02:26" itemprop="dateCreated datePublished" datetime="2021-02-01T16:02:26+08:00">2021-02-01</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-02-03 10:37:12" itemprop="dateModified" datetime="2021-02-03T10:37:12+08:00">2021-02-03</time>
+      </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="1-提交相关"><a href="#1-提交相关" class="headerlink" title="1. 提交相关"></a>1. 提交相关</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">// 添加文件至缓存区</span><br><span class="line"><span class="built_in">alias</span> ga=<span class="string">&#x27;git add&#x27;</span> &lt;文件/文件夹路径&gt;/&lt;*&gt;</span><br><span class="line">// 提交并展示缓存区文件的diff</span><br><span class="line"><span class="built_in">alias</span> gc=<span class="string">&#x27;git commit -v&#x27;</span></span><br><span class="line">// 添加所有文件至缓存区并提交</span><br><span class="line"><span class="built_in">alias</span> gcam=<span class="string">&#x27;git commit -a -m&#x27;</span> &lt;message&gt;</span><br><span class="line">// 提交代码 </span><br><span class="line"><span class="built_in">alias</span> gcmsg=<span class="string">&#x27;git commit -m&#x27;</span> &lt;message&gt;</span><br><span class="line">// 查看当前仓库修改代码与源代码的不同</span><br><span class="line"><span class="built_in">alias</span> gd=<span class="string">&#x27;git diff&#x27;</span></span><br><span class="line">// 查看当前仓库修改代码与源代码的不同</span><br><span class="line"><span class="built_in">alias</span> gsh=<span class="string">&#x27;git show&#x27;</span></span><br><span class="line">// 拉取当前分支最新代码</span><br><span class="line"><span class="built_in">alias</span> ggpull=<span class="string">&#x27;git pull origin &quot;$(git_current_branch)&quot;&#x27;</span></span><br><span class="line">// 推送当前已经commit的代码</span><br><span class="line"><span class="built_in">alias</span> ggpush=<span class="string">&#x27;git push origin &quot;$(git_current_branch)&quot;&#x27;</span></span><br><span class="line">// 忽略当前修改的某些文件不进行提交</span><br><span class="line"><span class="built_in">alias</span> gignore=<span class="string">&#x27;git update-index --assume-unchanged&#x27;</span></span><br><span class="line">// 恢复忽略掉的文件进行提交</span><br><span class="line"><span class="built_in">alias</span> gunignore=<span class="string">&#x27;git update-index --no-assume-unchanged&#x27;</span></span><br><span class="line">// 查看当前已经忽略掉的文件</span><br><span class="line"><span class="built_in">alias</span> gignored=<span class="string">&#x27;git ls-files -v | grep &quot;^[[:lower:]]&quot;&#x27;</span></span><br><span class="line">// 合并提交</span><br><span class="line"><span class="built_in">alias</span> grbi=<span class="string">&#x27;git rebase -i&#x27;</span></span><br><span class="line">// 将当前修改的文件存入仓储</span><br><span class="line"><span class="built_in">alias</span> gsta=<span class="string">&#x27;git stash save&#x27;</span></span><br><span class="line">// 从仓储中取出某次修改</span><br><span class="line"><span class="built_in">alias</span> gstp=<span class="string">&#x27;git stash pop&#x27;</span></span><br><span class="line">// 查看仓储中存储的list</span><br><span class="line"><span class="built_in">alias</span> gstl=<span class="string">&#x27;git stash list&#x27;</span></span><br><span class="line">// 清除仓储</span><br><span class="line"><span class="built_in">alias</span> gstc=<span class="string">&#x27;git stash clear&#x27;</span></span><br></pre></td></tr></table></figure>
+<h2 id="2-分支相关"><a href="#2-分支相关" class="headerlink" title="2. 分支相关"></a>2. 分支相关</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">// 查看当前本地的分支</span><br><span class="line"><span class="built_in">alias</span> gb=<span class="string">&#x27;git branch&#x27;</span></span><br><span class="line">// 查看当前和远程的所有分支</span><br><span class="line"><span class="built_in">alias</span> gba=<span class="string">&#x27;git branch -a&#x27;</span></span><br><span class="line">// 删除分支</span><br><span class="line"><span class="built_in">alias</span> gbd=<span class="string">&#x27;git branch -d&#x27;</span> &lt;分支名称&gt;</span><br><span class="line">// 删除已合并并且不是git主分支且不包含正则中相关关键字的分支</span><br><span class="line"><span class="built_in">alias</span> gbda=<span class="string">&#x27;git branch --no-color --merged | command grep -vE &quot;^(\+|\*|\s*($(git_main_branch)|development|develop|devel|dev)\s*$)&quot; | command xargs -n 1 git branch -d&#x27;</span></span><br><span class="line">// 强制删除</span><br><span class="line"><span class="built_in">alias</span> gbD=<span class="string">&#x27;git branch -D&#x27;</span> &lt;分支名称&gt;</span><br><span class="line">// 查看当前文件中每行的修改人</span><br><span class="line"><span class="built_in">alias</span> gbl=<span class="string">&#x27;git blame -b -w&#x27;</span></span><br><span class="line">// 查询没有合并过的分支</span><br><span class="line"><span class="built_in">alias</span> gbnm=<span class="string">&#x27;git branch --no-merged&#x27;</span></span><br><span class="line">// 查询远程分支</span><br><span class="line"><span class="built_in">alias</span> gbr=<span class="string">&#x27;git branch --remote&#x27;</span></span><br><span class="line">// 检出指定分支</span><br><span class="line"><span class="built_in">alias</span> gcb=<span class="string">&#x27;git checkout -b&#x27;</span></span><br><span class="line">// 检出master分支/主分支</span><br><span class="line"><span class="built_in">alias</span> gcm=<span class="string">&#x27;git checkout $(git_main_branch)&#x27;</span></span><br><span class="line">// 切换到置顶分支</span><br><span class="line"><span class="built_in">alias</span> gco=<span class="string">&#x27;git checkout&#x27;</span> &lt;branch&gt;</span><br><span class="line">// 同步当前仓库的分支信息</span><br><span class="line"><span class="built_in">alias</span> gf=<span class="string">&#x27;git fetch&#x27;</span></span><br><span class="line">// Merge目标分支到当前分支</span><br><span class="line"><span class="built_in">alias</span> gm=<span class="string">&#x27;git merge&#x27;</span></span><br><span class="line">// 将当前分支变基到目标分支</span><br><span class="line"><span class="built_in">alias</span> grb=<span class="string">&#x27;git rebase&#x27;</span></span><br><span class="line">// 取消变基操作</span><br><span class="line"><span class="built_in">alias</span> grba=<span class="string">&#x27;git rebase --abort&#x27;</span></span><br><span class="line">// 继续变基操作</span><br><span class="line"><span class="built_in">alias</span> grbc=<span class="string">&#x27;git rebase --continue&#x27;</span></span><br></pre></td></tr></table></figure>
+<h2 id="4-Git初始化相关"><a href="#4-Git初始化相关" class="headerlink" title="4. Git初始化相关"></a>4. Git初始化相关</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 从远端仓库克隆代码到本地</span><br><span class="line"><span class="built_in">alias</span> gcl=<span class="string">&#x27;git clone --recurse-submodules&#x27;</span></span><br></pre></td></tr></table></figure>
+<h2 id="5-Git配置相关"><a href="#5-Git配置相关" class="headerlink" title="5. Git配置相关"></a>5. Git配置相关</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 查看git所有配置</span><br><span class="line"><span class="built_in">alias</span> gcf=<span class="string">&#x27;git config --list&#x27;</span></span><br></pre></td></tr></table></figure>
+<h2 id="6-Git历史相关"><a href="#6-Git历史相关" class="headerlink" title="6. Git历史相关"></a>6. Git历史相关</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 查看当前仓库的每个人的提交次数</span><br><span class="line"><span class="built_in">alias</span> gcount=<span class="string">&#x27;git shortlog -sn&#x27;</span></span><br><span class="line">// 查看当前提交历史</span><br><span class="line"><span class="built_in">alias</span> glol=<span class="string">&quot;git log --graph --pretty=&#x27;%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#x27;&quot;</span></span><br><span class="line">// 查看当前提交历史</span><br><span class="line"><span class="built_in">alias</span> glog=<span class="string">&#x27;git log --oneline --decorate --graph&#x27;</span></span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/git/" rel="tag"># git</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/01/28/HttpClient%E6%90%BA%E5%B8%A6SSL%E8%AF%81%E4%B9%A6%E8%AE%BF%E9%97%AE/" rel="prev" title="HttpClient携带SSL证书访问">
+                  <i class="fa fa-chevron-left"></i> HttpClient携带SSL证书访问
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yup</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
+
+<script>
+NexT.utils.loadComments('.gitalk-container', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'd377b8b1ec7538067fa9',
+      clientSecret: '463c4c72c322b69b624c57aee04cbcdbfa8e18c9',
+      repo        : 'everybody-talk',
+      owner       : 'Yup-Zz',
+      admin       : ['Yup-Zz'],
+      id          : 'f74d7646459c4b8f52c36023ed413393',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render(document.querySelector('.gitalk-container'));
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

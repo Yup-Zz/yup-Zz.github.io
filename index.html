@@ -173,14 +173,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -218,6 +218,80 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/01/oh-my-zsh%E4%B8%ADgit%E5%91%BD%E4%BB%A4%E7%9A%84%E7%AE%80%E5%86%99/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Yup">
+      <meta itemprop="description" content="Yup's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yup's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/02/01/oh-my-zsh%E4%B8%ADgit%E5%91%BD%E4%BB%A4%E7%9A%84%E7%AE%80%E5%86%99/" class="post-title-link" itemprop="url">oh-my-zsh中git命令的简写</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-02-01 16:02:26" itemprop="dateCreated datePublished" datetime="2021-02-01T16:02:26+08:00">2021-02-01</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-02-03 10:37:12" itemprop="dateModified" datetime="2021-02-03T10:37:12+08:00">2021-02-03</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="1-提交相关"><a href="#1-提交相关" class="headerlink" title="1. 提交相关"></a>1. 提交相关</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">// 添加文件至缓存区</span><br><span class="line"><span class="built_in">alias</span> ga=<span class="string">&#x27;git add&#x27;</span> &lt;文件/文件夹路径&gt;/&lt;*&gt;</span><br><span class="line">// 提交并展示缓存区文件的diff</span><br><span class="line"><span class="built_in">alias</span> gc=<span class="string">&#x27;git commit -v&#x27;</span></span><br><span class="line">// 添加所有文件至缓存区并提交</span><br><span class="line"><span class="built_in">alias</span> gcam=<span class="string">&#x27;git commit -a -m&#x27;</span> &lt;message&gt;</span><br><span class="line">// 提交代码 </span><br><span class="line"><span class="built_in">alias</span> gcmsg=<span class="string">&#x27;git commit -m&#x27;</span> &lt;message&gt;</span><br><span class="line">// 查看当前仓库修改代码与源代码的不同</span><br><span class="line"><span class="built_in">alias</span> gd=<span class="string">&#x27;git diff&#x27;</span></span><br><span class="line">// 查看当前仓库修改代码与源代码的不同</span><br><span class="line"><span class="built_in">alias</span> gsh=<span class="string">&#x27;git show&#x27;</span></span><br><span class="line">// 拉取当前分支最新代码</span><br><span class="line"><span class="built_in">alias</span> ggpull=<span class="string">&#x27;git pull origin &quot;$(git_current_branch)&quot;&#x27;</span></span><br><span class="line">// 推送当前已经commit的代码</span><br><span class="line"><span class="built_in">alias</span> ggpush=<span class="string">&#x27;git push origin &quot;$(git_current_branch)&quot;&#x27;</span></span><br><span class="line">// 忽略当前修改的某些文件不进行提交</span><br><span class="line"><span class="built_in">alias</span> gignore=<span class="string">&#x27;git update-index --assume-unchanged&#x27;</span></span><br><span class="line">// 恢复忽略掉的文件进行提交</span><br><span class="line"><span class="built_in">alias</span> gunignore=<span class="string">&#x27;git update-index --no-assume-unchanged&#x27;</span></span><br><span class="line">// 查看当前已经忽略掉的文件</span><br><span class="line"><span class="built_in">alias</span> gignored=<span class="string">&#x27;git ls-files -v | grep &quot;^[[:lower:]]&quot;&#x27;</span></span><br><span class="line">// 合并提交</span><br><span class="line"><span class="built_in">alias</span> grbi=<span class="string">&#x27;git rebase -i&#x27;</span></span><br><span class="line">// 将当前修改的文件存入仓储</span><br><span class="line"><span class="built_in">alias</span> gsta=<span class="string">&#x27;git stash save&#x27;</span></span><br><span class="line">// 从仓储中取出某次修改</span><br><span class="line"><span class="built_in">alias</span> gstp=<span class="string">&#x27;git stash pop&#x27;</span></span><br><span class="line">// 查看仓储中存储的list</span><br><span class="line"><span class="built_in">alias</span> gstl=<span class="string">&#x27;git stash list&#x27;</span></span><br><span class="line">// 清除仓储</span><br><span class="line"><span class="built_in">alias</span> gstc=<span class="string">&#x27;git stash clear&#x27;</span></span><br></pre></td></tr></table></figure>
+<h2 id="2-分支相关"><a href="#2-分支相关" class="headerlink" title="2. 分支相关"></a>2. 分支相关</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">// 查看当前本地的分支</span><br><span class="line"><span class="built_in">alias</span> gb=<span class="string">&#x27;git branch&#x27;</span></span><br><span class="line">// 查看当前和远程的所有分支</span><br><span class="line"><span class="built_in">alias</span> gba=<span class="string">&#x27;git branch -a&#x27;</span></span><br><span class="line">// 删除分支</span><br><span class="line"><span class="built_in">alias</span> gbd=<span class="string">&#x27;git branch -d&#x27;</span> &lt;分支名称&gt;</span><br><span class="line">// 删除已合并并且不是git主分支且不包含正则中相关关键字的分支</span><br><span class="line"><span class="built_in">alias</span> gbda=<span class="string">&#x27;git branch --no-color --merged | command grep -vE &quot;^(\+|\*|\s*($(git_main_branch)|development|develop|devel|dev)\s*$)&quot; | command xargs -n 1 git branch -d&#x27;</span></span><br><span class="line">// 强制删除</span><br><span class="line"><span class="built_in">alias</span> gbD=<span class="string">&#x27;git branch -D&#x27;</span> &lt;分支名称&gt;</span><br><span class="line">// 查看当前文件中每行的修改人</span><br><span class="line"><span class="built_in">alias</span> gbl=<span class="string">&#x27;git blame -b -w&#x27;</span></span><br><span class="line">// 查询没有合并过的分支</span><br><span class="line"><span class="built_in">alias</span> gbnm=<span class="string">&#x27;git branch --no-merged&#x27;</span></span><br><span class="line">// 查询远程分支</span><br><span class="line"><span class="built_in">alias</span> gbr=<span class="string">&#x27;git branch --remote&#x27;</span></span><br><span class="line">// 检出指定分支</span><br><span class="line"><span class="built_in">alias</span> gcb=<span class="string">&#x27;git checkout -b&#x27;</span></span><br><span class="line">// 检出master分支/主分支</span><br><span class="line"><span class="built_in">alias</span> gcm=<span class="string">&#x27;git checkout $(git_main_branch)&#x27;</span></span><br><span class="line">// 切换到置顶分支</span><br><span class="line"><span class="built_in">alias</span> gco=<span class="string">&#x27;git checkout&#x27;</span> &lt;branch&gt;</span><br><span class="line">// 同步当前仓库的分支信息</span><br><span class="line"><span class="built_in">alias</span> gf=<span class="string">&#x27;git fetch&#x27;</span></span><br><span class="line">// Merge目标分支到当前分支</span><br><span class="line"><span class="built_in">alias</span> gm=<span class="string">&#x27;git merge&#x27;</span></span><br><span class="line">// 将当前分支变基到目标分支</span><br><span class="line"><span class="built_in">alias</span> grb=<span class="string">&#x27;git rebase&#x27;</span></span><br><span class="line">// 取消变基操作</span><br><span class="line"><span class="built_in">alias</span> grba=<span class="string">&#x27;git rebase --abort&#x27;</span></span><br><span class="line">// 继续变基操作</span><br><span class="line"><span class="built_in">alias</span> grbc=<span class="string">&#x27;git rebase --continue&#x27;</span></span><br></pre></td></tr></table></figure>
+<h2 id="4-Git初始化相关"><a href="#4-Git初始化相关" class="headerlink" title="4. Git初始化相关"></a>4. Git初始化相关</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 从远端仓库克隆代码到本地</span><br><span class="line"><span class="built_in">alias</span> gcl=<span class="string">&#x27;git clone --recurse-submodules&#x27;</span></span><br></pre></td></tr></table></figure>
+<h2 id="5-Git配置相关"><a href="#5-Git配置相关" class="headerlink" title="5. Git配置相关"></a>5. Git配置相关</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 查看git所有配置</span><br><span class="line"><span class="built_in">alias</span> gcf=<span class="string">&#x27;git config --list&#x27;</span></span><br></pre></td></tr></table></figure>
+<h2 id="6-Git历史相关"><a href="#6-Git历史相关" class="headerlink" title="6. Git历史相关"></a>6. Git历史相关</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 查看当前仓库的每个人的提交次数</span><br><span class="line"><span class="built_in">alias</span> gcount=<span class="string">&#x27;git shortlog -sn&#x27;</span></span><br><span class="line">// 查看当前提交历史</span><br><span class="line"><span class="built_in">alias</span> glol=<span class="string">&quot;git log --graph --pretty=&#x27;%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#x27;&quot;</span></span><br><span class="line">// 查看当前提交历史</span><br><span class="line"><span class="built_in">alias</span> glog=<span class="string">&#x27;git log --oneline --decorate --graph&#x27;</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
